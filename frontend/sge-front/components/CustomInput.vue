@@ -7,6 +7,7 @@ const props = defineProps({
 });
 //o model vai definir a informação que VAI PARA fora do componente
 const model = defineModel();
+
 </script>
 
 <template>
@@ -23,16 +24,16 @@ const model = defineModel();
         width: 100%;
         color: black;
     }    
-   
+
     input{
         width:100%;
         padding:10px;
         border:0;
         border-bottom: 2px solid black;
         font-size:20px;
-        &:focus{
-            outline: 0;
-            border-color: crimson;
+        &:focus{ 
+             outline: 0;
+             border-color: crimson;
         }
     }
 }

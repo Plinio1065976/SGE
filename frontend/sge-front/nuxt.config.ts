@@ -20,17 +20,27 @@ export default defineNuxtConfig({
     '~/assets/style/global-project.scss',  //css global customizado para toda a aplicação
   ],
   auth: {
-    baseURL: 'http://localhost:8000',//endereço do backend
+    baseURL: 'http://localhost:8000',
     provider: {
-      type: 'local',//biblioteca sidebase no modo local (webToken)
+      type: 'local',
       endpoints: {
-        signIn: { path: '/token/login', method: 'post' },//endereço do djoser
-        signOut: { path: '/token/logout', method: 'post' },//endereço do djoser
-        //signUp: false,//criar usuário novo (desativado temporáriamente)
-        getSession: { path: '/users', method: 'get' },//endereço p/ confirmar token
+        signIn: { path: '/api/auth/token/login', method: 'post' }, //rota do login
+        signOut: { path: '/api/auth/token/logout', method: 'post' }, //rota do logout
+        signUp: { path: '', method: 'get' }, //rota de cadastro
+        getSession: { path: '/api/auth/users', method: 'get' }, //rota autenticada para verificação se foi autenticado c/ sucesso
+        //refresh: { } //rota para renovar o token (somente no type refresh)
       },
-      token: { signInResponseTokenPointer: '/auth_token', type: 'Token' },
-      pages: { login: '/' }//endereço da página de login do front
+      token: {
+        signInResponseTokenPointer: '/auth_token', //indica o local do token access na resposta do backend
+        maxAgeInSeconds: 600 //validade do token access
+      },
+      // refreshToken: { 
+      //   signInResponseRefreshTokenPointer: '', //local do token refresh
+      //   maxAgeInSeconds: 600, //validade do token refresh
+      // },
+      pages: {
+        login: '/' //endereço (rota) da página de login
+      }
     }
   }
 })
